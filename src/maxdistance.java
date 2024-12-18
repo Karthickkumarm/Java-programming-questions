@@ -17,7 +17,7 @@ public class maxdistance{
         }
 
         public static void main(String[] args) {
-            String s = "abcabcdefag";
+            String s = "abcbda";
             int result = maxDistance(s);
             System.out.println(result);
         }
