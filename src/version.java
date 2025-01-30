@@ -20,7 +20,7 @@ public class version {
                     j++;
                 }
                 if (num1 != num2) {
-                    return num1 < num2 ? -1 : 1;
+                    return num1 < num2 ? 1 : -1;
                 }
                 num1 = 0;
                 num2 = 0;
