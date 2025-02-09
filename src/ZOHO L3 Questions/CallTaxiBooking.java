@@ -141,11 +141,8 @@ public class CallTaxiBooking {
 
         if (booking.bookingType.equals("2")) { // Shared booking
             for (Taxi taxi : taxis) {
-                if (!taxi.isOnSharedBooking && taxi.currentLocation.equals(booking.startPoint)) {
-                    selectedTaxi = taxi;
-                    break;
-                } else if (taxi.isOnSharedBooking && taxi.sharedBookingDestination.equals(booking.endPoint)
-                        && taxi.currentLocation.equals(booking.startPoint) ) {
+                if (taxi.isOnSharedBooking && taxi.sharedBookingDestination.equals(booking.endPoint)
+                     ) {
                     selectedTaxi = taxi;
                     break;
                 }
@@ -205,3 +202,68 @@ public class CallTaxiBooking {
         }
     }
 }
+
+
+
+
+// private static Taxi allotTaxi(Booking booking) { // Corrected and final version
+//     Taxi selectedTaxi = null;
+
+//     if (booking.bookingType.equals("2")) { // Shared booking
+//         for (Taxi taxi : taxis) {
+//             if (!taxi.isOnSharedBooking && taxi.currentLocation.equals(booking.startPoint)) {
+//                 selectedTaxi = taxi;
+//                 break;
+//             } else if (taxi.isOnSharedBooking && taxi.sharedBookingDestination.equals(booking.endPoint)
+//                     && taxi.currentLocation.equals(booking.startPoint) ) {
+//                 selectedTaxi = taxi;
+//                 break;
+//             }
+//         }
+//     } else { // Normal booking
+//         for (Taxi taxi : taxis) {
+//             if (taxi.currentLocation.equals(booking.startPoint)) {
+//                 if (selectedTaxi == null || taxi.earnings < selectedTaxi.earnings) {
+//                     selectedTaxi = taxi;
+//                 }
+//             }
+//         }
+
+//         if (selectedTaxi == null) {
+//             for (Taxi taxi : taxis) {
+//                 if (selectedTaxi == null || taxi.earnings < selectedTaxi.earnings) {
+//                     selectedTaxi = taxi;
+//                 }
+//             }
+//         }
+//     }
+
+//     if (selectedTaxi != null) {
+//         selectedTaxi.updateEarnings(booking.charges);
+
+//         int distance = Math.abs(booking.endPoint.charAt(0) - booking.startPoint.charAt(0)) * 15;
+//         int travelTime = distance;
+
+//         if (booking.bookingType.equals("2")) {
+//             if (!selectedTaxi.isOnSharedBooking) { // Starting a new shared ride
+//                 selectedTaxi.updateLocation(booking.endPoint);
+//                 selectedTaxi.setSharedBooking(true, booking.endPoint);
+//             }
+//             // If taxi is already on shared ride, location is not updated here.
+//         } else {
+//             selectedTaxi.updateLocation(booking.endPoint);
+//             selectedTaxi.setSharedBooking(false, null); // Reset shared status
+//         }
+
+//         booking.endTime = calculateEndTime(booking.startTime, travelTime); // Corrected End Time Calculation
+
+//         selectedTaxi.addTrip(String.format("%d\t%s\t%s\t%s\t%s\t%s\t%d",
+//                 booking.bookingId, booking.startPoint, booking.endPoint,
+//                 booking.startTime, booking.endTime, booking.bookingType, booking.charges));
+
+//         bookings.add(booking);
+//     }
+
+//     return selectedTaxi;
+// }
+
